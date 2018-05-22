@@ -71,7 +71,6 @@ scoder2.add(null);
 function MainClass() {
 	this.create = function() {
 		var b1 = document.createElement("button");
-		b1.
 	}
 	this.increment = function() {
 		alert("increment");
@@ -80,6 +79,7 @@ function MainClass() {
 
 	}
 }
+
 var main = new MainClass();
 
 document.getElementById("create").onclick = function() { main.create(); }
