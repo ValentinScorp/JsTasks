@@ -1,1 +1,26 @@
-<head>Hello</head>
+<html>
+
+<head>
+	<script>
+		var increase = (function() {
+			var counter = 0;
+			return function() { return counter+=1; }
+		})();
+		function increaseInput() {
+			document.getElementById("input1").value = increase();
+		}
+
+	</script>
+</head>
+
+<body>
+	<input type="number" id="input1" value=0>
+	<button id="button1" onclick="increaseInput()">Increase</button>
+	<div>
+		<button id="create">create</button>
+		<button id="inc">inc</button>
+		<button id="del">del</button>
+	</div>
+</body>
+
+</html>
