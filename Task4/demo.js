@@ -118,14 +118,17 @@ function getElementsNum(curElem) {
 }
 
 function getElementIndex(curElem) {
-	var parent = curElem.parentNode;
-	var ind = 0;
-	alert(parent.children.length);
-	for (var i = 0; i < parent.children.length; i++) {
-		if (parent.children[i].id == curElem.id) {
-			return i;
+	if (curElem != null) {
+		var parent = curElem.parentNode;
+		if (parent != null) {
+			for (var i = 0; i < parent.children.length; i++) {
+				if (parent.children[i] != null) {
+					if (parent.children[i].id == curElem.id) {
+						return i;
+					}
+				}
+			}
 		}
-		ind += 1;
 	}
 	return null;
 }
@@ -146,7 +149,9 @@ function MainClass() {
 			var div = mainclass.blocks[b].divelem;
 			if (typeof(div) == "object") {
 				var index = getElementIndex(div);
-				mainclass.blocks[b].setIndex(parseInt(index) + parseInt(elnum));
+				if (index != null) {
+					mainclass.blocks[b].setIndex(parseInt(index) + parseInt(elnum));
+				}
 			}
 		}
 	}
