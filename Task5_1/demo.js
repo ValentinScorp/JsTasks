@@ -80,5 +80,16 @@ $(document).ready(function() {
     addElement("<div>", "id-test3", "some text");
     addElement("<div>", "id-test4", "some text");
 
+    var $div2 = $("<div>", { "id": "div2-d" }).text("Text element").appendTo(document.body);
+    var $chkbx = $("<input>", {"type": "checkbox", "id": "checkbox-id"}).appendTo(document.body);
+    var $select = $("<select>", {"id": "select-id"}).appendTo(document.body);
+    $select.append($("<option>").text("option 1"));
+    $select.append($("<option>").text("option 2"));
+    $select.append($("<option>").text("option 3"));
+    var radio = $("<input>", {"type": "radio", "id": "radio-id"}).appendTo(document.body);
 
+    $div2.text("onload");
+    $chkbx.prop("checked", true);
+    $select.val("option 3");
+    radio.prop("checked", true);
 });
