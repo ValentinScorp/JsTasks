@@ -80,6 +80,7 @@ $(document).ready(function() {
     addElement("<div>", "id-test3", "some text");
     addElement("<div>", "id-test4", "some text");
 
+// P3
     var $div2 = $("<div>", { "id": "div2-d" }).text("Text element").appendTo(document.body);
     var $chkbx = $("<input>", {"type": "checkbox", "id": "checkbox-id"}).appendTo(document.body);
     var $select = $("<select>", {"id": "select-id"}).appendTo(document.body);
@@ -92,4 +93,46 @@ $(document).ready(function() {
     $chkbx.prop("checked", true);
     $select.val("option 3");
     radio.prop("checked", true);
+
+// P4
+    for (var i = 1; i <= 100; i++) {
+		var tag;
+		if (i % 2 == 0) {
+			tag = "<span>";
+		} else {
+			tag = "<div>";
+		}
+		if ((i % 7 == 0)) {
+			tag = "<p>";
+		}
+        $(tag, {"id": i.toString(), "text": tag.replace(/[<>]/g, '') + i.toString() }).appendTo(document.body);
+}
+
+var fibo = [2, 3, 5, 8, 13, 21, 34, 55, 89];
+
+for (var f in fibo) {
+	$("#" + fibo[f].toString()).remove();
+}
+
+
+var images = ["https://placeimg.com/150/150/arch",
+    			"https://placeimg.com/150/150/nature",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-bank",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-bitcoin",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-car",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-database",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-battery-quarter",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-arrow-circle-left",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-apple",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-cart-arrow-down",
+    			"https://imgplaceholder.com/150x150/cccccc/757575/fa-bell" ];
+
+var imageIndexes = [];
+for (var i = 9; i < 100; i+=9) {
+	imageIndexes.push(i);
+}
+for (var i in imageIndexes) {
+    $("#" + imageIndexes[i].toString()).append($("<img>", {"src": images[i]}));
+}
+
 });
