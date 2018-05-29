@@ -17,17 +17,21 @@ $(document).ready(function () {
 function move(type) {
   $('#div-id').animate({
       left: '+=400',
+      backgroundColor: 'rgb(30, 220, 150)',
     }, {
       duration: 2000,
       specialEasing: {
         left: type,
+        backgroundColor: type,
       },
     }).animate({
         left: '-=400',
+        backgroundColor: 'rgb(200, 70, 50)',
       }, {
         duration: 2000,
         specialEasing: {
           left: type,
+          backgroundColor: type,
         },
       });
 }
