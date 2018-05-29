@@ -1,0 +1,9 @@
+http://jsfiddle.net/gh/get/library/pure/ValentinScorp/JsTasks/tree/master/Task6
+---
+ name: Task6
+ description: task6
+ authors:
+   - Valentin
+ normalize_css: no
+ wrap: b
+ ...
