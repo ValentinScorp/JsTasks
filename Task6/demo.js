@@ -27,31 +27,3 @@ each 5 seconds switch places for 2 random images
 each 9 seconds make 1 random image width and height 120px slowly with 2sec animation
 and then set width and height back to 75px with 1sec animation
 */
-
-var body = document.getElementsByTagName('body')[0];
-var table = document.createElement('table');
-var tableBody = document.createElement('tbody');
-
-var informationRow = document.createElement('tr');
-var minusCell = document.createElement('td');
-var minusCellText = document.createTextNode('minus cell text');
-minusCell.appendChild(minusCellText);
-
-var barCell = document.createElement('td');
-var barCellDiv = document.createElement('div');
-barCellDiv.style.width = '100px';
-barCell.appendChild(barCellDiv);
-
-var plusCell = document.createElement('td');
-var plusCellText = document.createTextNode('plus cell text');
-plusCell.appendChild(plusCellText);
-
-informationRow.appendChild(minusCell);
-informationRow.appendChild(barCell);
-informationRow.appendChild(plusCell);
-
-tableBody.appendChild(informationRow);
-
-table.appendChild(informationRow);
-body.appendChild(table);
-table.setAttribute('border', '2');
