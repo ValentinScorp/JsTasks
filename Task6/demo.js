@@ -27,3 +27,110 @@ each 5 seconds switch places for 2 random images
 each 9 seconds make 1 random image width and height 120px slowly with 2sec animation
 and then set width and height back to 75px with 1sec animation
 */
+
+var seconds = 0;
+var minutes = 0;
+function toTimeFormat(min, sec) {
+  function toTwoDigLength(val) {
+    if (String(val).length == 1) {
+      return '0' + val;
+    }
+
+    return String(val);
+  }
+
+  return toTwoDigLength(min) + ':' + toTwoDigLength(sec);
+}
+
+function Progressbar(id, maxValue) {
+  var _this = this;
+  this.div = document.getElementById(id);
+  if (maxValue == 0) {
+    maxValue = 1;
+  }
+
+  this.mvalue = maxValue;
+  this.setNewValue = function (newValue) {
+    _this.div.setAttribute('style', 'background-size:' +
+      String(100 * Number(newValue) / Number(_this.mvalue)) + 'px 18px');
+  };
+}
+
+var prbar1 = new Progressbar('progressbar', 2 * 60 + 30);
+
+function Timer(id, min, sec, prbar) {
+  var _this = this;
+  this.seconds = sec;
+  this.minutes = min;
+  this.cancel = 0;
+  document.getElementById(id).innerHTML = toTimeFormat(_this.minutes, _this.seconds);
+  this.pbar = prbar;
+  this.secondsCount = function () {
+    _this.seconds += 1;
+    if (_this.seconds == 0 && _this.minutes < 0) {
+      _this.minutes += 1;
+      _this.seconds = -59;
+    } else if (_this.seconds >= 60) {
+      _this.seconds = 0;
+      _this.minutes += 1;
+    }
+
+    document.getElementById(id).innerHTML = toTimeFormat(_this.minutes, _this.seconds);
+    if (_this.pbar) {
+      _this.pbar.setNewValue(_this.seconds + 30);
+    }
+
+    if (_this.seconds == 0 && _this.minutes == 0) {
+      _this.pause();
+    }
+
+    if (_this.seconds == 30 && _this.minutes == 2) {
+      _this.pause();
+    }
+  };
+
+  this.play = function () {
+    _this.cancel = setInterval(_this.secondsCount, 1000);
+  };
+
+  this.pause = function () {
+    clearInterval(_this.cancel);
+  };
+
+  this.stop = function () {
+    if (_this.pbar) {
+      _this.pbar.setNewValue(0);
+    }
+
+    _this.pause();
+  };
+}
+
+var downTimer = new Timer('down-time', 0, -30, prbar1);
+var upTimer = new Timer('up-time', 2, 0, null);
+
+var playbutton = document.getElementById('div-play');
+playbutton.style.cursor = 'pointer';
+playbutton.onclick = function () {
+  if (playbutton.innerHTML == 'Play') {
+    playbutton.innerHTML = 'Pause';
+    downTimer.play();
+    upTimer.play();
+  } else {
+    playbutton.innerHTML = 'Play';
+    downTimer.pause();
+    upTimer.pause();
+  }
+};
+
+var stopbutton = document.getElementById('div-stop');
+stopbutton.style.cursor = 'pointer';
+stopbutton.onclick = function () {
+  if (stopbutton.innerHTML == 'Stop') {
+    downTimer.stop();
+    upTimer.stop();
+    downTimer = new Timer('down-time', 0, -30, prbar1);
+    upTimer = new Timer('up-time', 2, 0, null);
+    document.getElementById('div-play').innerHTML = 'Play';
+  }
+};
