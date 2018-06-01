@@ -51,12 +51,15 @@ function Progressbar(id, maxValue) {
 
   this.mvalue = maxValue;
   this.setNewValue = function (newValue) {
-    _this.div.setAttribute('style', 'background-size:' +
-      String(100 * Number(newValue) / Number(_this.mvalue)) + 'px 18px');
+    _this.div.style.width = 100 - 100 * Number(newValue) / Number(_this.mvalue) + 'px';
+  };
+
+  this.reset = function () {
+    _this.div.style.width = '100px';
   };
 }
 
-var prbar1 = new Progressbar('progressbar', 2 * 60 + 30);
+var prbar1 = new Progressbar('bar', 2 * 60 + 30);
 
 function Timer(id, min, sec, prbar) {
   var _this = this;

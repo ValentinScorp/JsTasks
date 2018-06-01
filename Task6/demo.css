@@ -5,19 +5,22 @@ table, th, td  {
 th, td  {
   text-align: center;
   width: 100px;
+  padding: 0px;
 }
 
-#progressbar {
-  margin: left;
+#image {
+  position:relative;
   width: 100px;
   height: 18px;
+  background:url(https://wallscover.com/images/stripes-wallpaper-2.jpg);
+  background-size: cover;
 }
 
-div.image {
-  width: 50%;
-  height: 100%;
-  background:url(https://wallscover.com/images/stripes-wallpaper-2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 10% 10%;
-}​
+#bar {
+  position:absolute;
+  width: 100px;
+  height: 18px;
+  position: absolute;
+  right: 0px;
+  background-color: white;
+}
