@@ -3,11 +3,12 @@
 
 <head>
     <title>Task5_2</title>
+    <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
 
 <body>
-    <input id="input-name" required pattern="[A-Z][a-z]+" type="text">
-    <input id="input-tel" required pattern="[(][+][0-9][)][ ][0-9]{3}[ -][0-9]{2}[:][0-9]{2}[ ][0-9][ -][0-9]{2}" type="text">
+    <input id="input-name" type="text"/>
+    <input id="input-tel" type="text"/>
     <div>
         <select name="select" id="sel-list" onchange="selectChanged()">
             <option value="One">One</option>
@@ -22,6 +23,5 @@
         <button id="button-press-me" onclick="clickButton()">Press me!</button>
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="demo.js"></script>
 </html>

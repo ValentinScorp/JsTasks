@@ -9,8 +9,45 @@
 // If user clicks button then div(id='counter') should increase
 // value, basically each click adds +1 to value of div
 
-$(document).ready(function () {
-  $('head').append('<link rel="stylesheet" type="text/css" href="demo.css">');
+var fio = document.getElementById('input-name');
+var tel = document.getElementById('input-tel');
+
+fio.addEventListener('input', function (e) {
+  var nameInput = this.value;
+
+  var lastLetter = nameInput.slice(-1);
+  if (lastLetter !== ' ') {
+    lastLetter = '';
+  }
+
+  // убираем все кроме букв
+  nameInput = nameInput.split(',').map(function (v) {
+    return v.replace(/[^a-zA-Z]+/g, '');
+  });
+
+  nameInput = nameInput.toString();
+  nameInput = nameInput.toLowerCase();
+
+  var nameOutput = nameInput.split(' ').map(function (w) {
+    return w.charAt(0).toUpperCase() + w.slice(1);
+  });
+
+  nameOutput = nameOutput.toString() + lastLetter;
+  this.value = nameOutput;
+});
+
+tel.addEventListener('input', function (e) {
+  var input = this.value;
+  if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+  var values = input.split('/').map(function (v) {
+    return v.replace(/\D/g, '');
+  });
+
+  var output = values.map(function (v, i) {
+    return v.length == 2 && i < 2 ? v + ' / ' : v;
+  });
+
+  this.value = output.join('').substr(0, 14);
 });
 
 function selectChanged() {
