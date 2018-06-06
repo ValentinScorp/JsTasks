@@ -28,6 +28,7 @@ each 9 seconds make 1 random image width and height 120px slowly with 2sec anima
 and then set width and height back to 75px with 1sec animation
 */
 
+// ============================== P1 ========================
 var seconds = 0;
 var minutes = 0;
 function toTimeFormat(min, sec) {
@@ -137,3 +138,30 @@ stopbutton.onclick = function () {
     document.getElementById('div-play').innerHTML = 'Play';
   }
 };
+
+// ============================== P2 ========================
+
+setInterval(function () {
+  var rand = Math.floor(Math.random() * 5 + 1);
+  $('#image' + String(rand)).fadeOut('slow').fadeIn('slow');
+}, 2000);
+
+setInterval(function () {
+  var rand1 = Math.floor(Math.random() * 5 + 1);
+  var rand2 = Math.floor(Math.random() * 5 + 1);
+  while (rand1 == rand2) {
+    rand2 = Math.floor(Math.random() * 5 + 1);
+  }
+
+  var src1 = document.getElementById('image' + String(rand1)).src;
+  var src2 = document.getElementById('image' + String(rand2)).src;
+  document.getElementById('image' + String(rand1)).src = src2;
+  document.getElementById('image' + String(rand2)).src = src1;
+}, 5000);
+
+setInterval(function () {
+  var rand = Math.floor(Math.random() * 5 + 1);
+  $('#image' + String(rand))
+    .animate({ width: '120px', height: '120px' }, 2000)
+    .animate({ width: '75px', height: '75px' }, 1000);
+}, 9000);

@@ -24,3 +24,9 @@ th, td  {
   right: 0px;
   background-color: white;
 }
+
+img {
+  position:relative;
+  width: 75px;
+  height: 75px;
+}
