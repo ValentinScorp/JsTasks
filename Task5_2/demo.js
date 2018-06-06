@@ -13,41 +13,32 @@ var fio = document.getElementById('input-name');
 var tel = document.getElementById('input-tel');
 
 fio.addEventListener('input', function (e) {
-  var nameInput = this.value;
-
-  var lastLetter = nameInput.slice(-1);
-  if (lastLetter !== ' ') {
-    lastLetter = '';
-  }
-
-  // убираем все кроме букв
-  nameInput = nameInput.split(',').map(function (v) {
-    return v.replace(/[^a-zA-Z]+/g, '');
+  this.value = this.value.replace(/\b\w/g, function (l) {
+    return l.toUpperCase();
   });
-
-  nameInput = nameInput.toString();
-  nameInput = nameInput.toLowerCase();
-
-  var nameOutput = nameInput.split(' ').map(function (w) {
-    return w.charAt(0).toUpperCase() + w.slice(1);
-  });
-
-  nameOutput = nameOutput.toString() + lastLetter;
-  this.value = nameOutput;
 });
 
 tel.addEventListener('input', function (e) {
   var input = this.value;
-  if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
-  var values = input.split('/').map(function (v) {
-    return v.replace(/\D/g, '');
-  });
+  input = input.replace(/\D/g, '');
+  input = input.substring(0, 8);
+  var size = input.length;
 
-  var output = values.map(function (v, i) {
-    return v.length == 2 && i < 2 ? v + ' / ' : v;
-  });
+  if (size == 0) {
+    input = input;
+  } else if (size < 2) {
+    input = '(+' + input;
+  } else if (size < 5) {
+    input = '(+' + input.substring(0, 1) + ') ' + input.substring(1, 4);
+  } else if (size < 7) {
+    input = '(+' + input.substring(0, 1) + ') ' + input.substring(1, 4) +
+              '-' + input.substring(4, 6);
+  } else if (size < 9) {
+    input = '(+' + input.substring(0, 1) + ') ' + input.substring(1, 4) +
+              '-' + input.substring(4, 6) + ':' + input.substring(6, 8);
+  }
 
-  this.value = output.join('').substr(0, 14);
+  this.value = input;
 });
 
 function selectChanged() {
@@ -59,7 +50,7 @@ function clickCheckbox() {
   if (checkbox.checked == true) {
     if (document.getElementById('counter') == null) {
       $parent = $('<div>', { id: 'parent-div' }).appendTo(document.body);
-      $('<div>', { id: 'counter', value: '0' }).appendTo($parent);
+      $('<div>', { id: 'counter', text: '0' }).appendTo($parent);
       $('#counter').animate({ marginRight: '+=300px' }, 1000);
     }
   } else {
@@ -70,8 +61,8 @@ function clickCheckbox() {
 function clickButton() {
   var div = document.getElementById('counter');
   if (div != null) {
-    var value = Number(div.getAttribute('value'));
+    var value = Number(div.textContent);
     value += 1;
-    div.setAttribute('value', String(value));
+    div.textContent = value;
   }
 }
