@@ -12,16 +12,17 @@ on esc all changes should be cleared and div appears with previous text
 Implement this both native and jquery ways
 P3
 Create form with next components: 2 radio buttons, which says "Native" , "jQuery",
-2 radio buttons which says "GET" and "POST", and 3 inputs. If user selects Native,
-then native code will be used to send a request, otherwise jQuery implementation. if
-user selects GET then next field should be shown to the user: deviceId, type, filter,
+2 radio buttons which says "GET" and "POST", and 3 inputs.
+If user selects Native, then native code will be used to send a request, otherwise jQuery implementation.
+If user selects GET then next field should be shown to the user: deviceId, type, filter,
 if POST ,then 3 more is shown: table, name email
 create get request(both native js and jquery) with next params: deviceId, type, filter
 create a post request (both native js and jquery) with url params as in get and
 next body params: table, name, email.
 add send button, which invokes selected code.
-all requests should be working with http://requestb.in/ service
+all requests should be working with https://httpbin.org/ free service
 */
+
 // =================== P1 ==========================
 var image1 = document.getElementById('nativeImage');
 image1.addEventListener('wheel', function (e) {
@@ -50,12 +51,118 @@ $(document).ready(function () {
 });
 
 // =================== P2 ==========================
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keyup', function (e) {
+  var ndiv = document.getElementById('nativeDiv');
   if (e.ctrlKey && e.code == 'KeyE') {
-    document.getElementById('nativeDiv').contentEditable = 'true';
+    ndiv.contentEditable = 'true';
   }
 
   if (e.ctrlKey && e.code == 'KeyS') {
-    document.getElementById('nativeDiv').contentEditable = 'false';
-  }  
+    ndiv.contentEditable = 'false';
+  }
+
+  if (e.code == 'Escape') {
+    if (ndiv.contentEditable == 'true') {
+      ndiv.innerHTML = '';
+      ndiv.contentEditable = 'false';
+    }
+  }
 });
+
+$(document).ready(function () {
+  $(document).bind('keyup', function (key) {
+    if (key.ctrlKey && key.keyCode == 69) {
+      $('#jqueryDiv').attr('contenteditable', 'true');
+    }
+
+    if (key.ctrlKey && key.keyCode == 83) {
+      $('#jqueryDiv').attr('contenteditable', 'false');
+    }
+
+    if (key.keyCode == 27) {
+      if ($('#jqueryDiv').attr('contenteditable') == 'true') {
+        $('#jqueryDiv').attr('contenteditable', 'false');
+        $('#jqueryDiv').html('');
+      }
+    }
+  });
+});
+
+// =================== P3 ==========================
+var currentRequest = 0;
+
+function sendButtonClicked() {
+  if (currentRequest == 0) {
+    return;
+  }
+
+  if (document.getElementById('native').checked) {
+    var xhr = new XMLHttpRequest();
+    var parameters = '';
+    var method = '';
+    if (currentRequest == 1) {
+      method = 'GET';
+      parameters = 'get?' + getParam1 + '&' + getParam2 + '&' + getParam3;
+    } else {
+      method = 'POST';
+      parameters = 'post?' + postParam1 + '=' + document.getElementById('input1').value + '&' +
+                            postParam2 + '=' + document.getElementById('input2').value  + '&' +
+                            postParam3 + '=' + document.getElementById('input3').value;
+    }
+
+    xhr.open(method, 'https://httpbin.org/' + parameters, false);
+    xhr.send();
+
+    if (xhr.status != 200) {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } else {
+      alert('Response ok!');
+    }
+  } else if (document.getElementById('jquery').checked) {
+    if (currentRequest == 1) {
+      $.get('https://httpbin.org/get', {
+        deviceId: document.getElementById('input1').value,
+        type: document.getElementById('input2').value,
+        filter: document.getElementById('input3').value,
+      }).
+      done(function (data, textStatus, jqXHR) {
+        alert('success');
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert('error: ' + errorThrown);
+      });
+    } else {
+      $.post('https://httpbin.org/post', {
+        table: document.getElementById('input1').value,
+        name: document.getElementById('input2').value,
+        email: document.getElementById('input3').value,
+      }).
+      done(function (data, textStatus, jqXHR) {
+        alert('success');
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert('error: ' + errorThrown);
+      });
+    }
+  }
+}
+
+var getParam1 = 'deviceId';
+var getParam2 = 'type';
+var getParam3 = 'filter';
+
+var postParam1 = 'table';
+var postParam2 = 'name';
+var postParam3 = 'email';
+
+function getRadioClicked() {
+  currentRequest = 1;
+  document.getElementById('input1').value = getParam1;
+  document.getElementById('input2').value = getParam2;
+  document.getElementById('input3').value = getParam3;
+}
+
+function postRadioClicked() {
+  currentRequest = 2;
+  document.getElementById('input1').value = postParam1;
+  document.getElementById('input2').value = postParam2;
+  document.getElementById('input3').value = postParam3;
+}

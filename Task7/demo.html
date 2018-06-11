@@ -9,7 +9,22 @@
 <body>
   <img class="center" id="nativeImage" src="https://www.unilad.co.uk/wp-content/uploads/2015/12/Buddy_christ.jpg" alt="img">
   <img class="center" id="jqueryImage" src="https://www.unilad.co.uk/wp-content/uploads/2015/12/Buddy_christ.jpg" alt="img">
-  <div id="nativeDiv"></div>
+  <div id="nativeDiv" class= "p2"></div>
+  <div id="jqueryDiv" class= "p2"></div>
+  <form action="">
+    <input type="radio" name="method" id="native" value="Native" checked> Native<br>
+    <input type="radio" name="method" id="jquery" value="jQuery"> jQuery<br>
+  </form>
+  <form action="">
+    <input type="radio" name="command" value="GET" onclick="getRadioClicked()"> GET<br>
+    <input type="radio" name="command" value="POST" onclick="postRadioClicked()"> POST<br>
+  </form>
+  <form>
+    <input type="text" id="input1"><br>
+    <input type="text" id="input2"><br>
+    <input type="text" id="input3"><br>
+  </form>
+  <button onclick="sendButtonClicked()">Send</button>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="demo.js"></script>
