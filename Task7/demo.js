@@ -29,14 +29,16 @@ image1.addEventListener('wheel', function (e) {
   var w = image1.clientWidth;
   var h = image1.clientHeight;
   if (e.deltaY < 0 && w < 250 && h < 250) {
-    image1.style.width = w + 15;
-    image1.style.height = h + 15;
+    image1.style.width = String(w + 15) + 'px';
+    image1.style.height = String(h + 15) + 'px';
   }
 
   if (e.deltaY > 0 && w > 100 && h > 100) {
-    image1.style.width = w - 15;
-    image1.style.height = h - 15;
+    image1.style.width = String(w - 15) + 'px';
+    image1.style.height = String(h - 15) + 'px';
   }
+
+  e.preventDefault();
 });
 
 $(document).ready(function () {
@@ -47,18 +49,24 @@ $(document).ready(function () {
       $('#jqueryImage').width(newWidth);
       $('#jqueryImage').height(newWidth);
     }
+
+    e.preventDefault();
   });
 });
 
 // =================== P2 ==========================
-document.addEventListener('keyup', function (e) {
+document.addEventListener('keydown', function (e) {
   var ndiv = document.getElementById('nativeDiv');
   if (e.ctrlKey && e.code == 'KeyE') {
+    e.preventDefault();
     ndiv.contentEditable = 'true';
+    return false;
   }
 
   if (e.ctrlKey && e.code == 'KeyS') {
+    e.preventDefault();
     ndiv.contentEditable = 'false';
+    return false;
   }
 
   if (e.code == 'Escape') {
@@ -67,6 +75,21 @@ document.addEventListener('keyup', function (e) {
       ndiv.contentEditable = 'false';
     }
   }
+
+  return true;
+});
+
+document.addEventListener('keyup', function (e) {
+  var ndiv = document.getElementById('nativeDiv');
+  if (e.code == 'Escape') {
+    if (ndiv.contentEditable == 'true') {
+      ndiv.innerHTML = '';
+      ndiv.contentEditable = 'false';
+      return false;
+    }
+  }
+
+  return true;
 });
 
 $(document).ready(function () {
