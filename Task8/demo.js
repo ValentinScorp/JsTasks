@@ -47,3 +47,41 @@ function sendRequest() {
     alert(httpRequest.status + ': ' + httpRequest.statusText);
   }
 }
+
+function sendEmail() {
+  var data = JSON.stringify({
+    "personalizations": [{
+      "to": [
+        {
+          "email": "valentin.blo@gmail.com"
+        }
+      ],
+      "subject": "Hello, World!"
+    }],
+  "from": {
+    "email": "from_address@example.com"
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "without jquery"
+    }
+  ]
+});
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener('readystatechange', function () {
+    if (this.readyState === this.DONE) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open('POST', 'https://api.sendgrid.com/v3/mail/send');
+  xhr.setRequestHeader('authorization',
+      'Bearer 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');
+  xhr.setRequestHeader('content-type', 'application/json');
+
+  xhr.send(data);
+}
