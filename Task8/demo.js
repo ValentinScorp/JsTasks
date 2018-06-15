@@ -48,7 +48,7 @@ function sendRequest() {
   }
 }
 
-function sendEmail() {
+function sendEmailV3() {
   var data = JSON.stringify({
     "personalizations": [{
       "to": [
@@ -81,6 +81,25 @@ function sendEmail() {
   xhr.open('POST', 'https://api.sendgrid.com/v3/mail/send');
   xhr.setRequestHeader('authorization',
       'Bearer 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');
+  xhr.setRequestHeader('content-type', 'application/json');
+
+  xhr.send(data);
+}
+
+function sendEmailV2() {
+  var data = 'api_user=sendgridval&dfktynby117&to=calentin.mir@gmail.com&toname=Destination&subject=Example_Subject&text=testingtextbody&from=calentin.mir@gmail.com';
+
+  var xhr = new XMLHttpRequest();
+//  xhr.withCredentials = true;
+
+  xhr.addEventListener('readystatechange', function () {
+    if (this.readyState === this.DONE) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open('POST', 'https://api.sendgrid.com/api/mail.send.json');
+  //xhr.setRequestHeader('authorization', 'Bearer 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');
   xhr.setRequestHeader('content-type', 'application/json');
 
   xhr.send(data);
