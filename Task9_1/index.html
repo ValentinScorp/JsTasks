@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<body>
+
+<div ng-app="myApplication" ng-controller="myController">
+  <button ng-click="myButtonClick()">Click me!</button>
+  <input type="text" ng-model="inputModel">
+  <div ng-init="myDivInit()">{{inputModel}}</div>
+
+  <div>
+    <p><a href="#!/home">Home</a></p>    
+    <div ng-view></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
