@@ -18,6 +18,9 @@ angular.module("myApplication", ["ngRoute"])
     $scope.myButtonClick = function () {
       alert('Button clicked!');
     }
+    $scope.goPage2 = function() {
+      $location.url('/page2');      
+    }
   })
   .controller("myMainController", function($scope) {
 

@@ -18,6 +18,9 @@ angular.module("myApplication", ["ui.router"])
         });
   })
   .controller("myController", function($scope, $location) {
+    $scope.goPage2 = function() {
+      $location.url('/page2');
+    }
   })
   .controller("myMainController", function($scope) {
   })
