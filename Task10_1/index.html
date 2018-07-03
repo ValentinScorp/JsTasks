@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task10</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <button onclick="sendAjax()">Send Ajax</button>
+
+  <div ng-app="myApp" ng-controller="myController">
+    <button ng-click="sendAngular()">Send Angular</button>
+    {{ PostDataResponse }}
+  </div>
+</body>
+
+<script type="text/javascript" src="script.js"></script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task10</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+    <table class="table">
+  	<tr>
+  		<th>Name</th>
+  		<th>Title</th>
+  		<th>Number</th>
+      <th>Flag</th>
+  	</tr>
+  	<tr ng-repeat="row in table">
+  		<td>{{row.name}}</td>
+  		<td>{{row.title}}</td>
+  		<td>{{row.number}}</td>
+      <td>{{row.flag}}</td>
+  	</tr>
+    </table>
+  </div>
+</body>
+
+<script type="text/javascript" src="script.js"></script>
+</html>
