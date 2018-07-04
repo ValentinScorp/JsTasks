@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Count</th>
+		<th>Fresh</th>
+    <th></th>
+	</tr>
+	<tr ng-repeat="row in table">
+		<td>{{row.name}}</td>
+		<td>{{row.count}}</td>
+		<td>{{row.fresh}}</td>
+    <td>
+      <button ng-click="update($index)"><strong>update</strong></button>
+      <button ng-click="delete($index)"><strong>delete</strong></button>
+    </td>
+	</tr>
+  </table>
+
+</body>
+
+</html>
